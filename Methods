@@ -1,0 +1,27 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        string name=HelloWorld.getName();
+        string surname=HelloWorld.getSurname();
+        HelloWorld.PrintOut(name,surname);
+    }
+    public static string getName(){
+        Console.Write("Enter name: ");
+        string name=Console.ReadLine();
+        return name;
+    }
+    public static string getSurname(){
+        Console.Write("Enter surname: ");
+        string surname=Console.ReadLine();
+        return surname;
+    }
+    public static void PrintOut(string name,string surname){
+        Console.WriteLine($"Your name is {name} and your surname is {surname}");
+    }
+}
