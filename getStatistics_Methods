@@ -1,0 +1,43 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Console.Write("Enter number of data points: ");
+		int size=int.Parse(Console.ReadLine());
+		int[] arr=new int[size];
+		for(int i=0;i<size;i++){
+			arr[i]=getTestMarks(i);
+		}
+		displayStats(arr);
+	}
+	static int getTestMarks(int i){
+		Console.Write($"Enter your mark for test {i+1}: ");
+		int test=int.Parse(Console.ReadLine());
+		return test;
+	}
+	static void displayStats(int[] tests){
+		double size=(double)tests.Length;
+		double average;
+		int minimum=0;
+		int maximum=0;
+		int sum=0;
+		for(int j=0;j<size;j++){
+			sum+=tests[j];
+			if(j==0){
+				minimum=tests[j];
+				maximum=tests[j];
+			}
+			if(tests[j]>maximum){
+				maximum=tests[j];
+			}
+			if(tests[j]<minimum){
+				minimum=tests[j];
+			}
+		}
+		average=sum/size;
+		Console.WriteLine($"##### Statistics #####\nSum:{sum}\nAverage:{average}\nMinimum:{minimum}\nMaximum:{maximum}");
+		
+	}
+}
