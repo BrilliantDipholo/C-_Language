@@ -1,0 +1,110 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+/*
+Kabelo Dipholo
+2027198551
+Practical 6
+10 April 2025
+ */
+namespace ShapeAreaCalculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Console.Write("#### Welcome to the AreaCalculator App ####\n1.Calculate the area of a Square\n2.Calculate the area of a Circle\n3.Calculate the area of a Triangle\n4.Exit the program\nChoose option: ");
+                int choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Console.Write("Enter the length of the side: ");//Prompts the user to enter the length of the side
+                        double length = Convert.ToDouble(Console.ReadLine());
+                        if (AreaOfSquare(length) == -1)//If the value of the AreaOfSquare method(return value) is -1 ,then it means that the user entered a value <=0..So we will display an error.
+                        {
+                            Console.WriteLine("Error:The length cannot be less or equal to 0.");
+                        }
+                        else//Otherwise then it means that the user entered a side length >0,We proceed with the calculation and display the area of the square(Which is the return value of the method)
+                        {
+                            Console.WriteLine($"Total area = {Math.Round(AreaOfSquare(length),2)}");//Area displayed rounded off to 2 decimal places
+                        }
+                        break;
+                    case 2:
+                        Console.Write("Enter the radius of the circle: ");//Prompts the user to enter the length of radius
+                        double radius = Convert.ToDouble(Console.ReadLine());
+                        if (AreaOfCircle(radius) == -1)//If the value of the AreaOfCircle method(return value) is -1 ,then it means that the user entered a value <=0..So we will display an error.
+                        {
+                            Console.WriteLine("Error:The length cannot be less or equal to 0.");
+                        }
+                        else//Otherwise then it means that the user entered a side length >0,We proceed with the calculation and display the area of the circle(Which is the return value of the method)
+                        {
+                            Console.WriteLine($"Total area = {Math.Round(AreaOfCircle(radius),2)}");
+                        }
+                        break;
+                    case 3:
+                        Console.Write("Enter the length of base of the triangle: ");//Prompts the user to enter the length of base of the triangle
+                        double baseT = Convert.ToDouble(Console.ReadLine());
+                        Console.Write("Enter the length of height of the triangle: ");//Prompts the user to enter the length of the height
+                        double height = Convert.ToDouble(Console.ReadLine());
+                        if (AreaOfTriangle(baseT, height) == -1)//If the value of the AreaOfTriangle method(return value) is -1 ,then it means that the user entered a value <=0..So we will display an error.
+                        {
+                            Console.WriteLine("Error:The length cannot be less or equal to 0.");
+                        }
+                        else//Otherwise then it means that the user entered both base and height length >0,We proceed with the calculation and display the area of the Triangle(Which is the return value of the method)
+                        {
+                            Console.WriteLine($"Total area = {Math.Round(AreaOfTriangle(baseT, height),2)}");
+                        }
+                        break;
+                    case 4:
+                        Console.WriteLine("Okay bye.Thank you for using the AreaCalculator app");//This will display if the user chooses to exit(option 4)
+                        break;
+                    default:
+                        Console.WriteLine("Error : Invalid input..");//This will display if the user enters a number ,but its not 1 or 2 or 3 or 4
+                        break;
+                }
+                Console.ReadKey();
+            }
+            catch (FormatException)//This will catch exceptions if the user enters a letter instead of a number
+            {
+                Console.WriteLine("Error : Invalid input..");
+            }
+        }
+        static double AreaOfSquare(double s)//The method used to calculate the area of a square
+        {
+            if (s <= 0)
+            {
+                return -1;//This will be returned if the side is <=0
+            }
+            else
+            {
+                return s * s;//This will be returned if the side is >0
+            }
+        }
+        static double AreaOfCircle(double r)//The method used to calculate the area of a circle
+        {
+            if (r <= 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return Math.PI*(r*r);
+            }
+        }
+        static double AreaOfTriangle(double baseT,double height)//The method used to calculate the area of a triangle
+        {
+            if (baseT <= 0 || height<=0)
+            {
+                return -1;
+            }
+            else
+            {
+                return (0.5)*baseT*height;
+            }
+        }
+    }
+}
