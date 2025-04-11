@@ -1,0 +1,64 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		try{
+			Console.Write("Calculating the area using coordinates\n1.Area of circle\n2.Area of square\n3.Exit\nChoose option: ");
+			int choice=int.Parse(Console.ReadLine());
+			switch(choice){
+				case 1:
+					Console.Write("\nFirst Coordinates\nX-Coordinates: ");
+					double x1=double.Parse(Console.ReadLine());
+					Console.Write("Y-Coordinates: ");
+					double y1=double.Parse(Console.ReadLine());
+					Console.Write("\nSecond Coordinates\nX-Coordinates: ");
+					double x2=double.Parse(Console.ReadLine());
+					Console.Write("Y-Coordinates: ");
+					double y2=double.Parse(Console.ReadLine());
+					if(x1==x2 && y1==y2){
+						Console.WriteLine("Total area= 0");
+					}
+					else{
+						Console.WriteLine($"Total area= {areaCircle(x1,y1,x2,y2)}");
+					}
+					break;
+				case 2:
+					Console.Write("\nFirst Coordinates\nX-Coordinates: ");
+					x1=double.Parse(Console.ReadLine());
+					Console.Write("Y-Coordinates: ");
+					y1=double.Parse(Console.ReadLine());
+					Console.Write("\nSecond Coordinates\nX-Coordinates: ");
+					x2=double.Parse(Console.ReadLine());
+					Console.Write("Y-Coordinates: ");
+					y2=double.Parse(Console.ReadLine());
+					if(x1==x2 && y1==y2){
+						Console.WriteLine("Total area= 0");
+					}
+					else{
+						Console.WriteLine($"Total area= {areaSquare(x1,y1,x2,y2)}");
+					}
+					break;
+				case 3:
+					Console.WriteLine("Bye.Thanks for using our app.");
+					break;
+			}
+		}	
+		catch(FormatException){
+			Console.WriteLine("Error:Invalid option..");
+		}
+	}
+	
+	static double areaCircle(double x1,double y1,double x2,double y2){
+		double radius=Program.getDistance(x1,y1,x2,y2);
+		return Math.Round((Math.PI*radius*radius),2);
+	}
+	static double areaSquare(double x1,double y1,double x2,double y2){
+		double side=Program.getDistance(x1,y1,x2,y2);
+		return Math.Round((side*side),2);
+	}
+	static double getDistance(double x1,double y1,double x2,double y2){
+		return Math.Sqrt(Math.Pow(x2-x1,2)+Math.Pow(y2-y1,2));
+	}
+}
