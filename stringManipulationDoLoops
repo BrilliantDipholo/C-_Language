@@ -1,0 +1,17 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		string order="";
+		string FullList="\n#### List of orders: ####\n";
+		int count=1;
+		do{
+			Console.Write("Enter order: ");
+			order=Console.ReadLine();
+			FullList+=$"{count++}."+order+"\n";
+		}while(order!="done");
+		Console.WriteLine(FullList);
+	}
+}
