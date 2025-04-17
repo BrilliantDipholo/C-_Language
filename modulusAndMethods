@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace MoneyBreaker
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Amount: R");
+            string input = Console.ReadLine();//Prompts the user to enter an amount
+            decimal amount;
+            bool isDecimal = GetDecimal(input, out amount);
+            string displayLabel = "\n";//This string i will use it to display the labels in the display method...i will simply concatinate the labels strings with it 
+            if (isDecimal)
+            {
+                int cents = (int)(amount * 100);//Convert the amount to cents
+                DisplayUnits(cents, ref cents, displayLabel);//Calling the display method so that it can display the labels and amounts
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input.Please enter a valid decimal number.");
+            }
+            Console.WriteLine("Press any key to close...");
+            Console.ReadKey();
+        }
+        static bool GetDecimal(string userInput,out decimal amount)
+        {
+            bool isDecimal = decimal.TryParse(userInput, out amount);
+            if (isDecimal)
+            {
+                return true;//if the amount entered ,is decimal..we return true
+            }
+            else
+            {
+                return false;//if its a letter or anything thats not a number we return false
+            }
+        }
+        static void DisplayUnits(int totalCents,ref int amountCents,string label)//Using void because we are simply displaying the labels and theres nothing that needs to be returned
+        {
+            int hundreds=totalCents / 10000;//This will immediately get us to the first digit of the amount and truncade the rest of the digits ..and that number in front is the number of 100 rands
+            int tens = (totalCents-(hundreds*100*100))/1000;
+            int ones = (totalCents-(hundreds*100*100)-(tens*10*100))/100;//Taking out the hundreds,tens and then dividing by 100 to get how many rands are there
+            int fiftyCents = (totalCents - (hundreds * 100 * 100) - (tens * 10 * 100) - (ones * 1 * 100))/50;//getting rid of the hundreds,tens,one rands and then checking how many 50 cents are left in the amount -> We then  assign that to fiftyCents
+            int fiveCents = ((totalCents - (hundreds * 100 * 100) - (tens * 10 * 100) - (ones * 1 * 100))-(50*fiftyCents))/ 5;//getting rid of the hundreds,tens,ones,fifty cents and then checking how many 5 cents are left in the amount -> We then  assign that to fiveCents
+            int oneCents = (totalCents - (hundreds * 100 * 100) - (tens * 10 * 100) - (ones * 1 * 100)) - (50 * fiftyCents) - (5 * fiveCents);//all thats left after minusing the hundreds,tens,1,50c,5c will be assigned to oneCents
+            label += $"Hundred rand (R100) : {hundreds}\nTen rands (R10) : {tens}\nOne rand (R1) : {ones}\nFifty cents (50c) : {fiftyCents}\nFive cents (5c) : {fiveCents}\nOne cents (1c) : {oneCents}\n";//Concatinating the label string 
+            Console.WriteLine(label);//Display the whole labels ..
+        }
+    }
+}
