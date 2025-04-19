@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+class Program
+{
+	static void Main(string[] args)
+	{
+		Console.Write("-------------------------------------\nStudent Email -> [username]@gmail.com\nPersonal Email -> [studentNumber]@[universityname]4life.ac.za\n-------------------------------------------------------------\nEnter email:");
+		string email=Console.ReadLine();
+		string studentNumber="0";
+		string firstPart="";
+		string university="";
+		int size=email.Length;
+		int indexOfAt=email.IndexOf("@");
+		string lastPart="";
+		if(indexOfAt!=-1){
+			for(int i=indexOfAt;i<email.Length;i++){
+				lastPart+=email[i];
+			}
+			if(lastPart=="@gmail.com"){
+				for(int j=0;j<indexOfAt;j++){
+					firstPart+=email[j];
+				}
+				Console.WriteLine($"\nThis is a personal email.\nYour username is {firstPart}");
+
+			}else{
+				int index4=email.LastIndexOf("4");
+				if(index4!=-1){
+					lastPart=email.Substring(index4);
+					if(lastPart=="4life.ac.za"){
+						university=email.Substring(indexOfAt+1,index4-indexOfAt-1);
+						studentNumber=email.Substring(0,indexOfAt);
+						Console.WriteLine($"\nThis is a student email.\nYour student number is {studentNumber}\nYou are a student at {university}\n");
+					}
+					else{
+						Console.WriteLine("Email is not valid.The last part is incorrect!");
+					}
+				}
+				else{
+					Console.WriteLine("Email is not valid.The last part should be 4life.ac.za");
+				}
+				
+			}
+		}
+		else{
+			Console.WriteLine("Email not valid.You didnt put an @");
+		}
+	}
+}
+
